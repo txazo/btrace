@@ -411,9 +411,8 @@ abstract class Client implements CommandListener {
     private static PerfReader createPerfReaderImpl() {
         // see if we can access any jvmstat class
         try {
-            if (Client.class.getResource("sun/jvmstat/monitor/MonitoredHost.class") != null) {
-                return (PerfReader) Class.forName("com.sun.btrace.agent.PerfReaderImpl").newInstance();
-            }
+            Class.forName("sun.jvmstat.monitor.MonitoredHost");
+            return (PerfReader) Class.forName("com.sun.btrace.agent.PerfReaderImpl").newInstance();
         } catch (Exception exp) {
             // can happen if jvmstat is not available
         }
