@@ -1,12 +1,19 @@
+import com.sun.tools.attach.VirtualMachine;
+import com.sun.tools.attach.VirtualMachineDescriptor;
+
+import java.util.List;
+
 public class ThreadTest {
 
     public static void main(String[] args) {
+        System.out.println("Pid: " + getCurrentPid());
+
         while (true) {
             new Thread(new Runnable() {
 
                 @Override
                 public void run() {
-                    System.out.println("New thread");
+                    // System.out.println("New thread");
                 }
 
             }).start();
@@ -17,6 +24,16 @@ public class ThreadTest {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static String getCurrentPid() {
+        List<VirtualMachineDescriptor> vms = VirtualMachine.list();
+        for (VirtualMachineDescriptor vmd : vms) {
+            if (ThreadTest.class.getName().equals(vmd.displayName())) {
+                return vmd.id();
+            }
+        }
+        return "";
     }
 
 }

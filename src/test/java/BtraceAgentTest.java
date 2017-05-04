@@ -8,7 +8,7 @@ public class BTraceAgentTest {
         String script = args[1];
         String javaHome = System.getenv("JAVA_HOME");
         String scriptPath = BTraceAgentTest.class.getResource("/").getPath() + "/../../src/test/java/com/sun/btrace/samples/";
-        String argument = String.format("-p 2021 -cp %s/lib/tools.jar %d %s%s", javaHome, pid, scriptPath, script);
+        String argument = String.format("-v -p 2021 -cp %s/lib/tools.jar %d %s%s", javaHome, pid, scriptPath, script);
         Main.main(argument.split("\\s+"));
     }
 
